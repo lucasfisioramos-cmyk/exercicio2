@@ -65,6 +65,7 @@ document.getElementById("funcionarioForm").addEventListener("submit", function(e
 
   alert("Funcionário cadastrado com sucesso!");
   gerarRelatorio();
+  gerarTabelaFuncionarios();
 });
 
 function gerarRelatorio(){
@@ -94,5 +95,35 @@ function gerarRelatorio(){
     <p><strong>Funcionários com bônus 5%:</strong> ${bonusFaixas[5]}</p>
     <p><strong>Funcionários com bônus 2%:</strong> ${bonusFaixas[2]}</p>
     <p><strong>Funcionários sem bônus:</strong> ${bonusFaixas[0]}</p>
-  `;
+  `;}
+
+  function gerarTabelaFuncionarios(){
+  if(funcionarios.length === 0) {
+    document.getElementById("tabelaFuncionarios").innerHTML = "<p>Nenhum funcionário cadastrado.</p>";
+    return;
+  }
+
+  let tabela = `<table border='1' cellpadding='5' cellspacing='0'>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Cargo</th>
+        <th>Salário Total (R$)</th>
+      </tr>
+    </thead>
+    <tbody>`;
+
+  funcionarios.forEach(f => {
+    let cargo = f.categoria === "F" ? "Funcionário Operacional" : "Gerente";
+    tabela += `<tr>
+      <td>${f.codigo}</td>
+      <td>${cargo}</td>
+      <td>${f.salarioFinal.toFixed(2)}</td>
+    </tr>`;
+  });
+
+  tabela += `</tbody></table>`;
+
+  document.getElementById("tabelaFuncionarios").innerHTML = tabela;
 }
+
