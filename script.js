@@ -15,8 +15,8 @@ function calcularSalario(func, salarioMinimo){
       else if(func.turno === "N") percentualHora = 0.40;
       break;
   }
-  let valorHora = salarioMinimo * percentualHora;
-  let salarioInicial = func.horas * valorHora;
+  let salarioInicial = salarioMinimo + salarioMinimo * percentualHora;
+  let valorHora = salarioInicial / func.horas;
 
   let auxilio = 0;
   if(salarioInicial <= 800) auxilio = salarioInicial * 0.25;
